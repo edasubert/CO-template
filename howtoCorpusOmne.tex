@@ -1,0 +1,214 @@
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage[czech]{babel}
+
+\title{Jak sázet \textbf{Corpus Omne} s balíčkem \texttt{CorpusOmne}}
+\author{Eduard Šubert}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Dokumentace k balíčku \texttt{CorpusOmne}, který vznikl na začátku roku 2014 na FJFI ČCUT v Praze pro sázení fakultního časopisu Corpus Omne. Postupně jsou vysvětleny všechny příkazy a prostředí přidané balíčkem, včetně velkého příkladu na konci. Případné dotazy a připomínky směrujte na \texttt{suberedu@fjfi.cvut.cz}.
+\end{abstract}
+
+\section{Titulní strana}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Prostředí \texttt{COtitlepage} vysází titulní stranu. Parametr \texttt{Pozadí} je obrázek na pozadí (poměr stran je zachován), volitelný parametr \texttt{Offset} posunuje obrázek vertikálně.
+
+Příkaz \texttt{COtitle} vysází hlavní titulek. Parametr \texttt{Datum} slouží k označení vydání. Měl by být používán výhradně v prostředí \texttt{COtitlepage}.
+
+Příkaz \texttt{COtitleBottom} vysází spodní citaci. Měl by být používán výhradně v prostředí \texttt{COtitlepage}. 
+Mezi \texttt{COtitle} a \texttt{COtitleBottom} může být libovolný obsah. 
+\begin{verbatim}
+\begin{COtitlepage}[Offset]{Pozadí}
+\COtitle{Datum}
+\vfill
+\COtitleBottom{Citace}{Autor}
+\end{COtitlepage}
+\end{verbatim}
+%
+\section{Článek}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Pro vysázení celého článku musíme použít několik příkazů:\\[0.3cm]
+Příkaz \texttt{COarticle} vysází formátovaný nadpis \texttt{Nadpis} článku. (Přidá položku do Obsahu.)
+\begin{verbatim}
+\COarticle{Nadpis}
+\end{verbatim}
+Příkaz \texttt{COsilentarticle} vysází formátovaný nadpis \texttt{Nadpis} článku. (NEpřidá položku do Obsahu.)
+\begin{verbatim}
+\COsilentArticle{Nadpis}
+\end{verbatim}
+Prostředí \texttt{COcolumn} slouží pro sázení textu do sloupců. Nepovinný parametr \texttt{PočetSloupců} nastavuje počet sloupců. Výchozí hodnota je $3$.
+\begin{verbatim}
+\begin{COcolumn}[PočetSloupců]
+\end{COcolumn}
+\end{verbatim}
+Příkaz \texttt{COquote} vysází zvýrazněnou citaci \texttt{Citace}. Měl by být používán výhradně v prostředí \texttt{COcolumn}.
+\begin{verbatim}
+\COquote{Citace}
+\end{verbatim}
+Příkaz \texttt{COpicture} vysází obrázek \texttt{Obrázek} s titulkem \texttt{Titulek}. Měl by být používán výhradně v prostředí \texttt{COcolumn}.
+\begin{verbatim}
+\COpicture{Obrázek}{Titulek}
+\end{verbatim}
+Příkaz \texttt{COauthor} vysází zkratku \texttt{Zkratka}. (Přidá položku do tiráže.) Měl by být používán výhradně před koncem prostředí \texttt{COcolumn}.
+\begin{verbatim}
+\COauthor{Jméno}{Zkratka}
+\end{verbatim}
+%
+\section{Editorial}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Editorial se sází stejně jako článek s jednou výjimkou:\\[0.3cm]
+Příkaz \texttt{COeditorial} vysází nadpis. (NEpřidá položku do Obsahu.)
+\begin{verbatim}
+\COeditorial
+\end{verbatim}
+%
+\section{Obsah}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Obsah je generován automaticky, každý článek je na úrovni \texttt{subsection}. Je tedy Nutné přidat dělení \texttt{section}:\\[0.3cm]
+Příkaz \texttt{COsection} NEvysází nic. (přidá položku do Obsahu.)
+\begin{verbatim}
+\COsection{Nadpis}
+\end{verbatim}
+Příkaz \texttt{COtableofcontents} vysází Obsah.
+\begin{verbatim}
+\COtableofcontents
+\end{verbatim}
+%
+\section{Tiráž}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tiráž se chová podobně jako Obsah, tedy obsahuje úrovně \texttt{section} (kategorie) a \texttt{subsection} (autoři).
+Příkaz \texttt{COLOAcategory} NEvysází nic. (přidá novou kategorii do Tiráže.)
+\begin{verbatim}
+\COLOAcategory{Kategorie}
+\end{verbatim}
+Příkaz \texttt{COsilentAuthor} NEvysází nic. Přidá do Tiráže autora bez zkratky.
+\begin{verbatim}
+\COsilentAuthor{Jméno}
+\end{verbatim}
+Příkaz \texttt{COmasthead} vysází Tiráž.
+\begin{verbatim}
+\COmasthead
+\end{verbatim}
+%
+\section{Ostatní}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Obrázky}
+Příkaz \texttt{COpagePicture} vysází obrázek \texttt{Obrázek} na celou stranu. Obrázek je roztažen až do krajů, musí mít poměr stran 210:297.
+\begin{verbatim}
+\COpagePicture{Obrázek}
+\end{verbatim}
+Příkaz \texttt{COfloatPicture} vysází obtékaný obrázek \texttt{Obrázek} s titulkem \texttt{Titulek}, zarovnáním \texttt{Zarovnání} $ \in \left[r,l\right] $ a šířkou \texttt{Šířka} (doporučuje se požívat tvar 0.4\\textwidth). Parametr \texttt{PočetObtékanýchŘádků} je výška obrázku v počtu řádků (více parametr \texttt{lineheight} prostředí \texttt{wrapfigure}).
+\begin{verbatim}
+\COfloatPicture{Obrázek}{Titulek}{Zarovnání}{Šířka}{PočetObtékanýchŘákdů}
+\end{verbatim}
+%
+\section{Příklad}
+%
+\begin{verbatim}
+\documentclass{CorpusOmne}
+
+\usepackage{lipsum} %pro sázení textu lipsum
+
+\begin{document}
+\begin{COtitlepage}[70]{titulka.jpg}
+\COtitle{(2) 2013/2014}
+\vfill
+Nějaký text bla bla\hfill
+\vfill
+\hfill ještě trochu textu
+\vfill
+\COtitleBottom{... a tuto rovnici vyřešíme metodou uhodnutí.}
+	{prof. Ing. Jiří Tolar, DrSc.}
+\end{COtitlepage}
+
+\COpagePicture{CO_vanoce.jpg}
+
+\COeditorial
+\COfloatPicture{uvodnikova.jpg}{}{r}{0.3\textwidth}{15}
+{Milí čtenáři Corpus Omne,\\[4mm]
+už je po Valentýnovi a tím pádem opět začal semestr. Abyste 
+si mezi přednáškami, cvičeními a praktiky mohli chvíli 
+odpočinout a přečíst si něco zábavného a obohacujícího, 
+je tu další vydání Corpus Omne.
+
+Tentokrát Vám přinášíme obsáhlý rozhovor s novým děkanem 
+FJFI prof. Ing. Igorem Jexem, DrSc., jako obvykle si můžete 
+přečíst o Bažantrikulaci a Drakiádě nebo se kouknout, 
+jak se v podzimní sezoně (ne)dařilo našim kolegům sportovcům. 
+Máme pro Vás dokonce i novinku v podobě jaderného komiksu.
+
+Za celou redakci Vám přeji příjemné čtení a hodně štěstí 
+do nového semestru.
+
+\hfill Vaše šéfredaktorka
+
+\hfill Hanča
+\\[4mm]
+PS: Kdybyste náhodou měli pocit, že máte nějak moc času 
+a chuť něco hodnotného vytvářet, rádi Vás uvítáme v redakci. 
+To víte, stárneme a potřebujeme nějakou novou krev... 
+Bližší info na co@fjfi.cvut.cz.
+}
+\COLOAcategory{Šéfredaktorka}
+\COsilentAuthor{Hana Wurzelová}
+\COLOAcategory{Redaktoři}
+
+\COtableofcontents
+\pagebreak
+
+\COsection{Sportem ku zdraví}
+
+\COarticle{Jaderná Drakiáda}
+\begin{COcolumn}
+\lipsum
+\COauthor{Lorem Ipsum}{lip}
+\end{COcolumn}
+
+\COarticle{Tralalalala}
+\begin{COcolumn}[2]
+\lipsum[4]
+\COpicture{uvodnikova.jpg}{titulek}
+\lipsum[5]
+\COquote{Kdybyste náhodou měli pocit, že máte nějak moc času a chuť %
+něco hodnotného vytvářet, rádi Vás uvítáme v redakci.}
+\lipsum
+\COauthor{Lorem Ipsum}{lip}
+\end{COcolumn}
+
+\COsection{Jádro \st{pudla} SUnie}
+
+\COarticle{Víkendovka}
+\begin{COcolumn}
+\lipsum[1]
+\COpicture{uvodnikova.jpg}{titulek}
+\lipsum[2]
+\end{COcolumn}
+\COauthor{Lorem Ipsum}{lip}
+
+\COarticle{Bažantrikulace}
+\begin{COcolumn}
+\lipsum[2]
+\COquote{Kdybyste náhodou měli pocit, že máte nějak moc času a chuť %
+něco hodnotného vytvářet, rádi Vás uvítáme v redakci.}
+\lipsum[2]
+\COauthor{Lorem Ipsum}{lip}
+\end{COcolumn}
+\vfill
+
+\COLOAcategory{Korektura}
+\COsilentAuthor{Lorem Ipsum}
+\COLOAcategory{Zpracování}
+\COsilentAuthor{Lorem Ipsum}
+\COsilentAuthor{Lorem Ipsum (ilustrace na obálce)}
+
+\pagebreak
+\COsilentArticle{Pro chvíle oddechu a nudy}
+\COfloatPicture{uvodnikova.jpg}{Sudoku}{r}{0.4\textwidth}{17}
+\COmasthead
+
+Oslavné básně nám pište na corpusomne@fjfi.cvut.cz
+\end{document}
+\end{verbatim}
+%
+\end{document}
