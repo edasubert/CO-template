@@ -1,0 +1,155 @@
+\documentclass[a4paper]{article}
+
+\usepackage{lipsum}
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage[czech]{babel}
+
+\usepackage{fullpage}
+
+\title{Jak sázet \textbf{Corpus Omne} s balíčkem \texttt{CorpusOmne}}
+\author{Eduard Šubert}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Dokumentace k balíčku \texttt{CorpusOmne}, který vznikl v roce 2014 na FJFI při ČVUT v Praze pro sázení fakultního časopisu Corpus Omne. Postupně jsou vysvětleny všechny příkazy a prostředí přidané balíčkem, včetně velkého příkladu na konci. Případné dotazy a připomínky směrujte na \texttt{suberedu@fjfi.cvut.cz}.
+\end{abstract}
+
+\section{Titulní strana}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{verbatim}
+\begin{COtitlepage}[offset]{background}
+\COtitle{Date}
+\vfill
+[anything]
+\vfill
+\COtitleBottom{citation}{author}
+\end{COtitlepage}
+\end{verbatim}
+
+Prostředí \texttt{COtitlepage} vysází titulní stranu. Parametr \texttt{background} je obrázek na pozadí (poměr stran je zachován), volitelný parametr \texttt{offset} posunuje obrázek vertikálně.
+
+Příkaz \texttt{COtitle} vysází hlavní titulek. Parametr \texttt{Date} slouží k označení vydání. Měl by být používán výhradně v prostředí \texttt{COtitlepage}.
+
+Příkaz \texttt{COtitleBottom} vysází spodní citaci. Měl by být používán výhradně v prostředí \texttt{COtitlepage}. Parametr \texttt{citation} obsahuje citaci a parametr \texttt{author} obsahuje celé jméno autora citace.
+Mezi \texttt{COtitle} a \texttt{COtitleBottom} může být libovolný obsah. 
+\paragraph{Příklad:}
+\begin{verbatim}
+\begin{COtitlepage}[70]{titulka.jpg}
+\COtitle{(2) 2013/2014}
+\vfill
+\COtitleBottom{... a tuto rovnici vyřešíme metodou uhodnutí.}{prof. Ing. Jiří Tolar, DrSc.}
+\end{COtitlepage}
+\end{verbatim}
+%
+\section{Editorial}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{verbatim}
+\COeditorial
+\end{verbatim}
+Příkaz \texttt{COeditorial} vysází nadpis \textbf{editorial}, za ním následuje text (více v sekci \ref{article}).
+%
+\section{Obsah}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Obsah je generován automaticky, každý článek je na úrovni \textbf{subsection}. Je tedy Nutné přidat dělení \textbf{section}:\\[0.3cm]
+Příkaz \texttt{COsection} NEvysází nic. (přidá položku do Obsahu.)
+\begin{verbatim}
+\COsection{title}
+\end{verbatim}
+Příkaz \texttt{COtableofcontents} vysází Obsah.
+\begin{verbatim}
+\COtableofcontents
+\end{verbatim}
+%
+\section{Tiráž}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tiráž se chová podobně jako Obsah, tedy obsahuje úrovně \textbf{section} (kategorie) a \textbf{subsection} (autoři).
+Příkaz \texttt{COLOAcategory} NEvysází nic. (přidá novou kategorii do Tiráže.)
+\begin{verbatim}
+\COLOAcategory{category}
+\end{verbatim}
+Příkaz \texttt{COauthor} Vysází zkratku. Přidá do Tiráže jméno autora. \texttt{COauthor*} nepřidá záznam do tiráže (vhodné pro autora vícera článků).
+\begin{verbatim}
+\COauthor{name}{abb}
+\end{verbatim}
+Příkaz \texttt{COeditor} NEvysází nic. Přidá do Tiráže jméno editora bez zkratky.
+\begin{verbatim}
+\COeditor{name}
+\end{verbatim}
+Příkaz \texttt{COmasthead} vysází Tiráž.
+\begin{verbatim}
+\COmasthead
+\end{verbatim}
+
+\paragraph{Příklad:}
+\begin{verbatim}
+\COLOAcathegory{Redaktoři}
+\COauthor{Jára Cimrman}{cim}
+\COauthor*{Jára Cimrman}{cim}
+\COeditor{Jára Cimrman}
+\end{verbatim}
+\paragraph{Doporučení:}
+Je více než vhodné hned za obsah vložit inicializaci tiráže, například takto:
+\begin{verbatim}
+\COLOAcathegory{Šéfredaktorka}
+\COeditor{Marie Curie}
+\COLOAcathegory{Redaktoři}
+\end{verbatim}
+Nyní je možné na konci každého článku přidat autora(y) a tiráž bude správně formátována.
+%
+\section{Článek}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{article}
+Pro vysázení celého článku musíme použít několik příkazů:\\[0.3cm]
+Příkaz \texttt{COarticle} vysází formátovaný nadpis \texttt{title} článku. Přidá záznam do obsahu. Volitelný parametr \texttt{abb} může sloužit jako kratší záznam do obsahu. \texttt{COarticle*} nepřidá záznam do obsahu.
+\begin{verbatim}
+\COarticle[abb]{title}
+\end{verbatim}
+Prostředí \texttt{COcolumn} slouží pro sázení textu do sloupců. Nepovinný parametr \texttt{number} nastavuje počet sloupců. Výchozí hodnota je $3$.
+\begin{verbatim}
+\begin{COcolumn}[number]
+\end{COcolumn}
+\end{verbatim}
+Příkaz \texttt{COquote} vysází zvýrazněnou citaci \texttt{quote}. Měl by být používán výhradně v prostředí \texttt{COcolumn}.
+\begin{verbatim}
+\COquote{quote}
+\end{verbatim}
+Příkaz \texttt{COpicture} vysází obrázek \texttt{picture} volitelně s titulkem \texttt{title}.
+\begin{verbatim}
+\COpicture[title]{picture}
+\end{verbatim}
+\paragraph{Příklad}
+\begin{verbatim}
+\COarticle[Tralalala]{Tralalalalala}
+\begin{COcolumn}
+...
+\COpicture[Jára Cimrman]{img/cimrman}
+...
+\COquote{Jára Cimrman ležící spící}
+...
+\COauthor{Marie Curie}{cur}
+\COauthor*{Albert Einstein}{alb}
+\end{COcolumn}
+\end{verbatim}
+%
+\section{Ostatní}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Obrázky}
+\begin{verbatim}
+\COpagePicture{picture}
+\end{verbatim}
+Příkaz \texttt{COpagePicture} vysází obrázek \texttt{picture} na celou stranu. Obrázek je roztažen až do krajů, musí mít poměr stran 210:297.
+\begin{verbatim}
+\COfloatPicture{picture}{title}{align}{width}{lines}
+\end{verbatim}
+Příkaz \texttt{COfloatPicture} vysází obtékaný obrázek \texttt{picture} s titulkem \texttt{title}, zarovnáním \texttt{align} $ \in \left[r,l\right] $ a šířkou \texttt{width} (doporučuje se požívat tvar 0.4\\textwidth). Parametr \texttt{lines} je výška obrázku v počtu řádků (více parametr \texttt{lineheight} prostředí \texttt{wrapfigure}).
+%
+\subsection{Jaderka na síti}
+\begin{verbatim}
+\COsocial
+\end{verbatim}
+Příkaz \texttt{COsocial} vysází tabulku s odkazy na různé stránky spojené s Jaderkou a na sociální sítě.
+\begin{verbatim}
+\COzodiac
+\end{verbatim}
+Příkaz \texttt{COzodiac} vysází nadpis \textbf{Horoskop} i s ilustrací.
+
+
+\end{document}

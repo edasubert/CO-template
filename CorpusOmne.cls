@@ -41,7 +41,7 @@
 	\renewcommand{\headrulewidth}{0pt}
 	\fancyfoot{}
 	\fancyfoot[LE,RO]{\thepage}
-	\fancyfoot[RE,LO]{Corpus Omne}
+	\fancyfoot[RE,LO]{\includegraphics[width=14pt]{icon/logo}}
 }
 \pagestyle{regular}
 
@@ -246,6 +246,12 @@
 		& \texttt{st.fjfi.cvut.cz/pohar-dekana}\\%
 	
 \end{tabular}%
+}
+
+% zodiac
+\newcommand{\COzodiac}{%
+\COarticle{HOROSKOP}%
+\COpicture{icon/horoskop}%
 }
 
 \endinput
