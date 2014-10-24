@@ -30,23 +30,27 @@
 \RequirePackage{wrapfig}
 \RequirePackage{soul}
 \RequirePackage{array}
-\RequirePackage[a4paper, top=10mm, bottom=25mm, left=15mm, right=15mm]{geometry}
+\RequirePackage[a4paper, top=15mm, bottom=25mm, left=15mm, right=15mm]{geometry}
 \RequirePackage{suffix}
 \RequirePackage{ifthen}
 \RequirePackage{xstring}
+
+\setlength{\headsep}{3mm}
 
 % Header and footer settings
 \fancypagestyle{regular}{
 	\fancyhead{}
 	\renewcommand{\headrulewidth}{0pt}
-	\fancyfoot{}
+	\fancyhead[LE,LO]{\textbf{\COsectionHeadSTR}}
 	\fancyfoot[LE,RO]{\thepage}
+	\fancyfoot[CE,CO]{}
 	\fancyfoot[RE,LO]{\includegraphics[width=14pt]{icon/logo}}
 }
 \pagestyle{regular}
 
 % Section, no output, just for table of contents
-\newcommand{\COsection}[1]{\addcontentsline{toc}{section}{#1}}
+\newcommand{\COsectionHeadSTR}{}
+\newcommand{\COsection}[1]{\addcontentsline{toc}{section}{#1}\renewcommand{\COsectionHeadSTR}{#1}}
 
 % Head for article
 \newcommand\COarticle[2][EMPTY]{%
@@ -156,7 +160,7 @@
 %
 \end{center}%
 \end{titlepage}%
-\newgeometry{top=10mm, bottom=25mm, left=15mm, right=15mm}%
+\newgeometry{top=15mm, bottom=25mm, left=15mm, right=15mm}%
 }
 
 \newcommand{\COtitle}[1]{%
@@ -222,7 +226,7 @@
 }}}%
 \vfill
 \clearpage
-\newgeometry{top=10mm, bottom=25mm, left=15mm, right=15mm}%
+\newgeometry{top=15mm, bottom=25mm, left=15mm, right=15mm}%
 \pagebreak
 }
 
@@ -250,8 +254,16 @@
 
 % zodiac
 \newcommand{\COzodiac}{%
+\needspace{100mm}%
 \COarticle{HOROSKOP}%
 \COpicture{icon/horoskop}%
+}
+
+% cover
+\newcommand{\COcover}[1][Pro chvíle oddechu a nudy]{%
+\pagebreak%
+\COarticle*{#1}%
+\renewcommand{\COsectionHeadSTR}{}%
 }
 
 \endinput
