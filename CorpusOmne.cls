@@ -37,16 +37,20 @@
 
 \setlength{\headsep}{3mm}
 
-% Header and footer settings
-\fancypagestyle{regular}{
-	\fancyhead{}
-	\renewcommand{\headrulewidth}{0pt}
-	\fancyhead[LE,LO]{\textbf{\COsectionHeadSTR}}
-	\fancyfoot[LE,RO]{\thepage}
-	\fancyfoot[CE,CO]{}
-	\fancyfoot[RE,LO]{\includegraphics[width=14pt]{icon/logo}}
-}
-\pagestyle{regular}
+\fancyhead{} 
+\fancyhead[LO,LE]{\textbf{\COsectionHeadSTR}}
+\fancyfoot{} 
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,RE]{\includegraphics[width=14pt]{icon/logo}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{} % except the center
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{fancy}
 
 % Section, no output, just for table of contents
 \newcommand{\COsectionHeadSTR}{}
@@ -276,6 +280,7 @@
 \pagebreak%
 \COarticle*{#1}%
 \renewcommand{\COsectionHeadSTR}{}%
+\pagestyle{plain}
 }
 
 \endinput
