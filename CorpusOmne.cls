@@ -50,14 +50,19 @@
 
 % Section, no output, just for table of contents
 \newcommand{\COsectionHeadSTR}{}
-\newcommand{\COsection}[1]{\addcontentsline{toc}{section}{#1}\renewcommand{\COsectionHeadSTR}{#1}}
+\newcommand{\COsection}[1]{%\addcontentsline{toc}{section}{#1}
+\renewcommand{\COsectionHeadSTR}{#1}}
+
+% Section * (not listed)
+\WithSuffix\newcommand\COsection*[1]{%
+\renewcommand{\COsectionHeadSTR}{#1}}
 
 % Head for article
 \newcommand\COarticle[2][EMPTY]{%
 \ifthenelse{ \equal{#1}{EMPTY} }{%
-  \addcontentsline{toc}{subsection}{#2}%
+  \addcontentsline{toc}{section}{#2}%
 }{%
-  \addcontentsline{toc}{subsection}{#1}%
+  \addcontentsline{toc}{section}{#1}%
 }%
 %
 \needspace{50mm}%
