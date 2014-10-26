@@ -94,6 +94,10 @@
 \renewcommand\COauthorCheck{first}% for multiple authors
 }
 
+\newcommand{\COyoutube}{%
+\hfill\includegraphics{icon/youtube}\hspace{3mm}%
+}
+
 %Head for editorial
 \newcommand{\COeditorial}[1][Slovo šéfredaktorky]{%
 \needspace{50mm}%
