@@ -53,10 +53,6 @@
 \newcommand{\COsection}[1]{%\addcontentsline{toc}{section}{#1}
 \renewcommand{\COsectionHeadSTR}{#1}}
 
-% Section * (not listed)
-\WithSuffix\newcommand\COsection*[1]{%
-\renewcommand{\COsectionHeadSTR}{#1}}
-
 % Head for article
 \newcommand\COarticle[2][EMPTY]{%
 \ifthenelse{ \equal{#1}{EMPTY} }{%
@@ -80,6 +76,22 @@
 \phantom{x}\hspace{3mm}%
 \textbf{\fontsize{10mm}{1em}\selectfont #1} \\[-0.5mm]%
 \rule{\linewidth}{0.5mm}%
+}
+
+% Head for article CUSTOM
+\newcommand\COarticleCustom[2]{%
+\addcontentsline{toc}{section}{#1}%
+%
+\needspace{50mm}%
+#2%
+\renewcommand\COauthorCheck{first}% for multiple authors
+}
+
+% Head for article CUSTOM * (not listed)
+\WithSuffix\newcommand\COarticleCustom*[1]{%
+\needspace{50mm}%
+#1%
+\renewcommand\COauthorCheck{first}% for multiple authors
 }
 
 %Head for editorial
@@ -236,26 +248,17 @@
 }
 
 % social networks
-\newcommand{\COsocial}{%
+\newenvironment{COsocial}{%
 \begin{tabular}{m{0.05\textwidth}m{0.95\textwidth}}%
-		& \texttt{jaderka.cz}\\%
-	\includegraphics{icon/mail}		& \texttt{co@fjfi.cvut.cz}\\%
-	\includegraphics{icon/facebook}	& \texttt{facebook.com/CorpusOmne}\\%
-		& \texttt{co.fjfi.cvut.cz}\\%
-	\includegraphics{icon/facebook}	& \texttt{facebook.com/Jaderka}\\%
-	\includegraphics{icon/youtube}	& \texttt{youtube.com/videoFJFI}\\%
-	\includegraphics{icon/twitter}	& \texttt{twitter.com/videoFJFI}\\%
-		& \texttt{video.fjfi.cvut.cz}\\%
-	\includegraphics{icon/facebook}	& \texttt{facebook.com/sttralalalala}\\%
-		& \texttt{st.fjfi.cvut.cz}\\%
-		& \texttt{st.fjfi.cvut.cz/sachy}\\%
-		& \texttt{st.fjfi.cvut.cz/squash}\\%
-		& \texttt{st.fjfi.cvut.cz/ping-pong}\\%
-		& \texttt{st.fjfi.cvut.cz/fotbalek }\\%
-		& \texttt{st.fjfi.cvut.cz/pohar-dekana}\\%
-	
+}{%
 \end{tabular}%
 }
+
+\newcommand{\COsocialFacebook}[1]{\includegraphics{icon/facebook}	& \Large\texttt{facebook.com/#1}\\}
+\newcommand{\COsocialMail}[1]{\includegraphics{icon/mail}	& \Large\texttt{#1}\\}
+\newcommand{\COsocialYoutube}[1]{\includegraphics{icon/youtube}	& \Large\texttt{youtube.com/#1}\\}
+\newcommand{\COsocialTwitter}[1]{\includegraphics{icon/twitter}	& \Large\texttt{twitter.com/#1}\\}
+\newcommand{\COsocialWeb}[1]{\includegraphics{icon/web}	& \Large\texttt{#1}\\}
 
 % zodiac
 \newcommand{\COzodiac}{%
