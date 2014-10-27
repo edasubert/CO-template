@@ -58,7 +58,7 @@
 \renewcommand{\COsectionHeadSTR}{#1}}
 
 % Head for article
-\newcommand\COarticle[2][EMPTY]{%
+\newcommand\COarticle[3][EMPTY]{%
 \ifthenelse{ \equal{#1}{EMPTY} }{%
   \addcontentsline{toc}{section}{#2}%
 }{%
@@ -68,7 +68,7 @@
 \needspace{50mm}%
 \noindent\rule{\linewidth}{0.5mm} \\[3mm]%
 \phantom{x}\hspace{3mm}%
-\textbf{\fontsize{10mm}{1em}\selectfont #2} \\[-0.5mm]%
+\textbf{\fontsize{#3mm}{1em}\selectfont \hfill #2 \hfill} \\[-0.5mm]%
 \rule{\linewidth}{0.5mm}%
 \renewcommand\COauthorCheck{first}% for multiple authors
 }
@@ -78,7 +78,7 @@
 \needspace{50mm}%
 \noindent\rule{\linewidth}{0.5mm} \\[3mm]%
 \phantom{x}\hspace{3mm}%
-\textbf{\fontsize{10mm}{1em}\selectfont #1} \\[-0.5mm]%
+\textbf{\fontsize{10mm}{1em}\selectfont \hfill #1 \hfill} \\[-0.5mm]%
 \rule{\linewidth}{0.5mm}%
 }
 
@@ -107,7 +107,7 @@
 \needspace{50mm}%
 \noindent\rule{\linewidth}{0.5mm} \\[3mm]%
 \phantom{x}\hspace{3mm}%
-\textbf{\fontsize{10mm}{1em}\selectfont #1} \\[-0.5mm]%
+\textbf{\fontsize{10mm}{1em}\selectfont \hfill #1 \hfill} \\[-0.5mm]%
 \rule{\linewidth}{0.5mm}%
 }
 
@@ -141,16 +141,22 @@
 \newcommand\COeditor[1]{ \refstepcounter{COauthor} \addcontentsline{loa}{COauthor}{#1} }
 
 % Table of contents
-\newcommand{\COtableofcontents}{%
+\newcommand{\COtableofcontents}[2]{%
 	\@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
-	\needspace{50mm}%
-	\noindent\rule{\linewidth}{0.5mm} \\[3mm]%
-	\phantom{x}\hspace{3mm}%
-	\textbf{\fontsize{10mm}{1em}\selectfont Obsah} \\[-0.5mm]%
-	\rule{\linewidth}{0.5mm}%
-\begin{COcolumn}[2]%
+	\COarticle*{Obsah}{10}%
+\begin{center}%
+\begin{minipage}[c]{#2\linewidth}%
+%
+\ifthenelse{ \equal{#1}{1} }{%
+	\@starttoc{toc}%
+}{%
+\begin{COcolumn}[#1]%
 	\@starttoc{toc}%
 \end{COcolumn}%
+}%
+%
+\end{minipage}
+\end{center}
 \thispagestyle{fancy}%
 \vfill%
 }
@@ -271,14 +277,14 @@
 % zodiac
 \newcommand{\COzodiac}{%
 \needspace{100mm}%
-\COarticle{HOROSKOP}%
+\COarticle{HOROSKOP}{10}%
 \COpicture{icon/horoskop}%
 }
 
 % cover
 \newcommand{\COcover}[1][Pro chvíle oddechu a nudy]{%
 \pagebreak%
-\COarticle*{#1}%
+\COarticle*{#1}{10}%
 \renewcommand{\COsectionHeadSTR}{}%
 \pagestyle{plain}
 }
