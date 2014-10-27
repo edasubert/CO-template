@@ -74,11 +74,11 @@
 }
 
 % Head for article * (not listed)
-\WithSuffix\newcommand\COarticle*[1]{%
+\WithSuffix\newcommand\COarticle*[2]{%
 \needspace{50mm}%
 \noindent\rule{\linewidth}{0.5mm} \\[3mm]%
 \phantom{x}\hspace{3mm}%
-\textbf{\fontsize{10mm}{1em}\selectfont \hfill #1 \hfill} \\[-0.5mm]%
+\textbf{\fontsize{#2mm}{1em}\selectfont \hfill #1 \hfill} \\[-0.5mm]%
 \rule{\linewidth}{0.5mm}%
 }
 
