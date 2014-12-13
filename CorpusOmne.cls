@@ -58,28 +58,33 @@
 \renewcommand{\COsectionHeadSTR}{#1}}
 
 % Head for article
-\newcommand\COarticle[3][EMPTY]{%
+\newcommand\COarticle[2][EMPTY]{%
 \ifthenelse{ \equal{#1}{EMPTY} }{%
   \addcontentsline{toc}{section}{#2}%
 }{%
   \addcontentsline{toc}{section}{#1}%
 }%
 %
+\begin{center}
 \needspace{50mm}%
-\noindent\rule{\linewidth}{0.5mm} \\[3mm]%
-\phantom{x}\hspace{3mm}%
-\textbf{\fontsize{#3mm}{1em}\selectfont \hfill #2 \hfill} \\[-0.5mm]%
+\noindent\rule{\linewidth}{0.5mm} \\[1mm]%
+%\phantom{x}\hspace{3mm}%
+\bfseries \fontsize{10mm}{11mm}\selectfont #2 \\[-6mm]%
 \rule{\linewidth}{0.5mm}%
+\end{center}
 \renewcommand\COauthorCheck{first}% for multiple authors
 }
 
 % Head for article * (not listed)
-\WithSuffix\newcommand\COarticle*[2]{%
+\WithSuffix\newcommand\COarticle*[1]{%
+\begin{center}
 \needspace{50mm}%
-\noindent\rule{\linewidth}{0.5mm} \\[3mm]%
-\phantom{x}\hspace{3mm}%
-\textbf{\fontsize{#2mm}{1em}\selectfont \hfill #1 \hfill} \\[-0.5mm]%
+\noindent\rule{\linewidth}{0.5mm} \\[1mm]%
+%\phantom{x}\hspace{3mm}%
+\bfseries \fontsize{10mm}{11mm}\selectfont #1 \\[-6mm]%
 \rule{\linewidth}{0.5mm}%
+\end{center}
+\renewcommand\COauthorCheck{first}% for multiple authors
 }
 
 % Head for article CUSTOM
@@ -99,7 +104,7 @@
 }
 
 \newcommand{\COyoutube}{%
-\hfill\includegraphics{icon/youtube}\hspace{3mm}%
+\hspace{5mm}\includegraphics{icon/youtube}%
 }
 
 %Head for editorial
