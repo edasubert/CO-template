@@ -148,7 +148,7 @@
 % Table of contents
 \newcommand{\COtableofcontents}[2]{%
 	\@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
-	\COarticle*{Obsah}{10}%
+	\COarticle*{Obsah}{10mm}%
 \begin{center}%
 \begin{minipage}[c]{#2\linewidth}%
 %
@@ -188,7 +188,7 @@
 \parbox[b][\paperheight]{\paperwidth}{%
 \vfill%
 \centering%
-\includegraphics[width=0.95\paperwidth,keepaspectratio]{#2}%
+\includegraphics[width=0.9\paperwidth,keepaspectratio]{#2}%
 \vfill%
 }}}%
 %
@@ -209,6 +209,9 @@
 }
 
 \newcommand{\COtitleBottom}[2]{%
+\end{center}%
+\includegraphics[width=0.2\linewidth,keepaspectratio]{icon/logoFJFI}\\[-5mm]%
+\begin{center}%
 \noindent\rule{\linewidth}{1mm}\\[2mm]%
 \end{center}%
 \textbf{\textit{\fontsize{5mm}{1em}\selectfont"#1"}}%
