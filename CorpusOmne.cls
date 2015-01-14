@@ -210,7 +210,8 @@
 
 \newcommand{\COtitleBottom}[2]{%
 \end{center}%
-\includegraphics[width=0.2\linewidth,keepaspectratio]{icon/logoFJFI}\\[-5mm]%
+\includegraphics[width=0.2\linewidth,keepaspectratio]{icon/logoFJFI}\\[-10mm]%
+\phantom{}\hspace{0.095\linewidth} 1955-\the\year
 \begin{center}%
 \noindent\rule{\linewidth}{1mm}\\[2mm]%
 \end{center}%
