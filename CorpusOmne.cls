@@ -36,6 +36,7 @@
 \RequirePackage{xstring}
 
 \setlength{\headsep}{3mm}
+\setlength{\headheight}{13.6pt}
 
 \fancyhead{} 
 \fancyhead[LO,LE]{\textbf{\COsectionHeadSTR}}
@@ -49,8 +50,13 @@
 \fancyhf{} % clear all header and footer fields
 \fancyfoot{} % except the center
 \renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}}
+\renewcommand{\footrulewidth}{0pt} }
 \pagestyle{fancy}
+
+% page geometry
+\newcommand{\COdefaultGeometry}{\newgeometry{top=15mm, bottom=25mm, left=15mm, right=15mm}}
+\newcommand{\COwholeGeometryn}{\newgeometry{top=0mm,bottom=0mm,right=0mm,left=0mm}}
+
 
 % Section, no output, just for table of contents
 \newcommand{\COsectionHeadSTR}{}
@@ -196,7 +202,7 @@
 %
 \end{center}%
 \end{titlepage}%
-\newgeometry{top=15mm, bottom=25mm, left=15mm, right=15mm}%
+\COdefaultGeometry
 }
 
 \newcommand{\COtitle}[1]{%
@@ -266,7 +272,7 @@
 }}}%
 \vfill
 \clearpage
-\newgeometry{top=15mm, bottom=25mm, left=15mm, right=15mm}%
+\COdefaultGeometry
 \pagebreak
 }
 
